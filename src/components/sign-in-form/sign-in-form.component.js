@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input';
 import Button from '../button/button.component';
+import { UserContext } from '../../context/user.context';
 
 import './sign-in-form.styles.scss';
 
@@ -15,9 +16,16 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
+    const { setCurrentUser } = useContext(UserContext);
+
+    const resetFormFields = () => {
+        setFormFields(defaultFormFields);
+    };
+
     const SignInWithGoogle = async () => {
         const { user } = await signInWithGooglePopup();
         await createUserDocumentFromAuth(user);
+        setCurrentUser(user);
     };
 
     const handleSubmit = async (event) => {
@@ -25,7 +33,11 @@ const SignInForm = () => {
 
         try {
             const { user } = await signInAuthUserWithEmailAndPassword(email, password);
-            console.log(user);
+
+            // using the context system
+            setCurrentUser(user);
+
+            resetFormFields();
         } catch (error) {
             switch (error.code) {
                 case 'auth/user-not-found':
