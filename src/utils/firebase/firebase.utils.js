@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 // we only need one but we're going to talk about both
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 // after setting up Firestore DB
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -28,7 +28,8 @@ googleProvider.setCustomParameters({
 // must only have one Auth
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
+
+// export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 // after setting up Firestore DB
 export const db = getFirestore();
@@ -64,4 +65,10 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
 
     return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+
+    return await signInWithEmailAndPassword(auth, email, password);
 };
