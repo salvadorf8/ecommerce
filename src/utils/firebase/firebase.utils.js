@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 // we only need one but we're going to talk about both
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { onAuthStateChanged, getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 // after setting up Firestore DB
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -74,3 +74,6 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
+
+// listener
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
