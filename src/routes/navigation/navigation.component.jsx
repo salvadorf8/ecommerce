@@ -6,9 +6,8 @@ import { UserContext } from '../../context/user.context';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
-import { CartContext } from '../../context/cart.context'; //releative path
+import { CartContext } from '../../context/cart.context'; //SF comment - is called a releative path
 
-// import './navigation.styles.scss';
 import { NavigationContainer, NavLinks, NavLink, LogoContainer } from './navigation.styles';
 
 const Navigation = () => {

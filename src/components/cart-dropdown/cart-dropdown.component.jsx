@@ -8,8 +8,6 @@ import CartItem from '../cart-item/cart-item.component';
 
 import { CartDropdownContainer, EmptyMessage, CartItems } from './cart-dropdown.styles';
 
-// import './cart-dropdown.styles.scss';
-
 const CartDropdown = () => {
     const { cartItems } = useContext(CartContext);
     const navigate = useNavigate();
@@ -18,7 +16,7 @@ const CartDropdown = () => {
         navigate('/checkout');
     };
 
-    // initially I used a Link, but course showed using useNavigate hook
+    // SF comment - initially I used a Link, but course showed using useNavigate hook
     return (
         <CartDropdownContainer>
             <CartItems>

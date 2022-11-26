@@ -4,7 +4,6 @@ import { onAuthStateChanged, getAuth, signInWithPopup, GoogleAuthProvider, creat
 // after setting up Firestore DB
 import { getFirestore, doc, getDoc, setDoc, collection, query, getDocs } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: 'AIzaSyBLn2qS_qaCFByFBG9q8X6NhfloTGsCod4',
     authDomain: 'ecommerce-db-5aa0e.firebaseapp.com',
@@ -34,7 +33,9 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 // after setting up Firestore DB
 export const db = getFirestore();
 
-// just a one time - below uses collection(), and writeBatch()
+/**
+ * SF comment - just a one time - below uses collection(), and writeBatch()
+ */
 // export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
 //     // just searching, firestore will create automatically even if it's not there
 //     const collectionRef = collection(db, collectionKey);
@@ -69,15 +70,19 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     if (!userAuth) {
         return;
     }
-    // first we need to see if there is an existing document reference (object that firestore uses)
-    // I want you to go to this db, under the users collection, with this user uid
+    /**
+     * SF comment - first we need to see if there is an existing document reference (object that firestore uses)
+     * I want you to go to this db, under the users collection, with this user uid
+     */
     const userDocRef = doc(db, 'users', userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);
 
-    //check if user data exists
-    // if false, create / set the document with the data from userAuth in my collection
-    // if true, return userDocRef
+    /**
+     * SF comment - check if user data exists
+     * if false, create / set the document with the data from userAuth in my collection
+     * if true, return userDocRef
+     */
     if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth;
         const createdAt = new Date();
@@ -106,5 +111,5 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
-// listener
+// SF comment - was referred as a listener
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
