@@ -1,0 +1,2 @@
+When using styled components, these components are known to have the most various ways of using styled components.
+created this before-styled-components to remember which files were converted and to reference if need 
