@@ -6,7 +6,11 @@ import { UserContext } from '../../context/user.context';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
-import { CartContext } from '../../context/cart.context'; //SF comment - is called a releative path
+/**
+ * SF comment - /context/cart.context is called a releative path.  The browser will automatically assume
+ * that you are trying to visit that relative path on the same domain you are currently visiting
+ */
+import { CartContext } from '../../context/cart.context';
 
 import { NavigationContainer, NavLinks, NavLink, LogoContainer } from './navigation.styles';
 
