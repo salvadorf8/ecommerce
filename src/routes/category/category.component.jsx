@@ -1,18 +1,20 @@
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { CategoriesContext } from '../../context/categories.context';
 import ProductCard from '../../components/product-card/product-card.component';
 
 import { CategoryContainer, CategoryTitle } from './category.styles';
+import { selectCategoriesMap } from '../../store/categories/categories.selector';
 
 const Category = () => {
     const { category } = useParams();
-    const { categoriesMap } = useContext(CategoriesContext);
-    // const products = categoriesMap[category]; //you could use this but will render everytime instead using useState, and useEffect
+    console.log('SF - render/re-rendering category.component.js', category);
+    const categoriesMap = useSelector(selectCategoriesMap);
     const [products, setProducts] = useState(categoriesMap[category]);
 
     useEffect(() => {
+        console.log('SF - useEffect fired calling setProducts');
         setProducts(categoriesMap[category]);
     }, [category, categoriesMap]);
 
