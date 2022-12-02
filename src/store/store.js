@@ -6,10 +6,13 @@ import thunk from 'redux-thunk';
 
 import { rootReducer } from './root-reducer';
 
+/**
+ * SF - now that we have a <Spinner /> we no longer need to persist categories, the only thing we need to persist is cart
+ */
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['user']
+    whitelist: ['cart']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
