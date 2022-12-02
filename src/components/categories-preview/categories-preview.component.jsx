@@ -6,9 +6,9 @@ import { selectCategoriesMap, selectCategoriesIsLoading } from '../../store/cate
 import Spinner from '../spinner/spinner.component';
 
 const CategoriesPreview = () => {
-    console.log('SF - CategoriesPreview fired');
-    const categoriesMap = useSelector(selectCategoriesMap);
     const isLoading = useSelector(selectCategoriesIsLoading);
+
+    const categoriesMap = useSelector(selectCategoriesMap);
 
     return (
         <Fragment>

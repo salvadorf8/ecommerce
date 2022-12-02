@@ -7,8 +7,6 @@ const CATEGORIES_INITIAL_STATE = {
 };
 
 export const categoriesReducer = (state = CATEGORIES_INITIAL_STATE, action = {}) => {
-    console.log('SF - categoriesReducer fired', state, action);
-
     const { type, payload } = action;
 
     switch (type) {
