@@ -5,20 +5,6 @@ import storage from 'redux-persist/lib/storage';
 
 import { rootReducer } from './root-reducer';
 
-const loggerMiddleware = (store) => (next) => (action) => {
-    if (!action.type) {
-        return next(action);
-    }
-
-    console.log('SF * type: ', action.type);
-    console.log('SF * payload: ', action.payload);
-    console.log('SF * currentState: ', store.getState());
-
-    next(action);
-
-    console.log('SF * next state: ', store.getState());
-};
-
 const persistConfig = {
     key: 'root',
     storage,
@@ -27,7 +13,12 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const middleWares = [loggerMiddleware];
+/**
+ *  only if environment === development render the logger
+ *  the .filter(Boolean) what this optimization does is it filters out anything that is not true
+ *  (works because its an array)
+ * */
+const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(Boolean);
 
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
